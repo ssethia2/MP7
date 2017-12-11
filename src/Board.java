@@ -33,6 +33,26 @@ public class Board {
 		}
 	}
 	/**
+	 *  makes sure all parameters work.
+	 * @param board 
+	 * @param ship
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private boolean canPlace(final Ships[][] board, final Ships ship,
+			final int x, final int y) {
+		if (ship.getLength() + y > 10) {
+			return false;
+		}
+		for (int j = 0; j < ship.getLength(); j++) {
+			if (board[x][y + j] != null) {
+				return false;
+			}
+			}
+				return true;
+	}
+	/**
 	 * places the ship on the board and makes sure its within the boundaries;
 	 * @param ship the ship being placed
 	 * @param orientation determines whether the ship will be placed horizontally or vertically
@@ -45,30 +65,18 @@ public class Board {
 			final int x, final int y) {
 		// if being placed vertically
 		if (orientation) {
-			if (ship.getLength() + y > 10) {
-				return null;//so that the place where the method is being called knows if the ship can't be placed there
-			}
-			/**
-			 * Check for ships that have already been placed around these co-ordinates
-			 * and if this ship can't be placed in this orientation
-			 */
-			for (int j = 0; j < ship.getLength(); j++) {
-				board[x][y - 1 + j] = ship;
+			if (canPlace(board, ship, x, y)) {
+				for (int j = 0; j < ship.getLength(); j++) {
+				board[x][y + j] = ship;
+				}
 			}
 			return board;
-		} 
 		// if being placed horizontally
-		else {
-			if (ship.getLength() + x > 10) {
-				return null;
-			}
-
-			/**
-			 * Check for ships that have already been placed around these co-ordinates
-			 * and if this ship can't be placed in this orientation
-			 */
-			for (int j = 0; j < ship.getLength(); j++) {
-				board[x - 1 + j][y] = ship;
+		} else{
+			if (canPlace(board, ship, x, y)) {
+				for (int j = 0; j < ship.getLength(); j++) {
+				board[x + j][y] = ship;
+				}
 			}
 			return board;
 		}
