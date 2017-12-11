@@ -36,19 +36,26 @@ public class Board {
 	 *  makes sure all parameters work.
 	 * @param board 
 	 * @param ship
+	 * @param orientation
 	 * @param x
 	 * @param y
 	 * @return
 	 */
-	private boolean canPlace(final Ships[][] board, final Ships ship,
+	private boolean canPlace(final Ships[][] board, final Ships ship,  final boolean orientation,
 			final int x, final int y) {
 		if (ship.getLength() + y > 10) {
 			return false;
 		}
 		for (int j = 0; j < ship.getLength(); j++) {
-			if (board[x][y + j] != null) {
-				return false;
-			}
+			if(orientation) {
+				if (board[x][y + j] != null) {
+					return false;
+				} else {
+					if (board[x + 1][y] != null) {
+						return false;
+					}
+				}
+				}
 			}
 				return true;
 	}
@@ -61,24 +68,22 @@ public class Board {
 	 * @param board the game board for the player
 	 * @return the array with the ship placed
 	 */
-	public Ships[][] setShips(final Ships[][] board, final Ships ship, final boolean orientation,
+	public void setShips(final Ships[][] board, final Ships ship, final boolean orientation,
 			final int x, final int y) {
 		// if being placed vertically
 		if (orientation) {
-			if (canPlace(board, ship, x, y)) {
+			if (canPlace(board, ship, orientation, x, y)) {
 				for (int j = 0; j < ship.getLength(); j++) {
 				board[x][y + j] = ship;
 				}
 			}
-			return board;
 		// if being placed horizontally
 		} else{
-			if (canPlace(board, ship, x, y)) {
+			if (canPlace(board, ship, orientation, x, y)) {
 				for (int j = 0; j < ship.getLength(); j++) {
 				board[x + j][y] = ship;
 				}
 			}
-			return board;
 		}
 	}
 }
