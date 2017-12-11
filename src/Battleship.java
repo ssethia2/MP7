@@ -56,7 +56,7 @@ public class Battleship {
 				orientation = false;
 			else
 				orientation = true;
-			if(player_board.setShips(player_board, player_ships[i-1], orientation, x, y) != null)
+			if(player_board.canPlace(player_board, player_ships[i-1], orientation, x, y))
 				break;
 			System.out.println("Invalid co-ordinates. Ship already in or around that orientation.");
 			} while(true);
