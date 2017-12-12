@@ -1,4 +1,4 @@
-public class Ships extends Player{
+public class Ships{
 	/**Name of the ship **/
 	private String name;
 	/**Length of the ship MAX can be 10 units **/
@@ -8,7 +8,14 @@ public class Ships extends Player{
 	private boolean sunk = false;
 	/**amount of hits taken **/
 	private int hit = 0;
-	
+	/**
+	 * id
+	 */
+	private static int id = 0;	
+	/**
+	 * ship's id
+	 */
+	private int shipId;
 	
 	/**
 	 * creates ship
@@ -19,6 +26,7 @@ public class Ships extends Player{
 		//super();//This was giving me an error, fixed now.
 		this.setName(name);
 		this.setLength(i);
+		this.shipId = ++id;
 	}
 
 	/**
@@ -28,7 +36,7 @@ public class Ships extends Player{
 	 * @param hits amount of hits taken
 	 */
 	public boolean hitShip(/*final int shipLen, final int hits*/) {//I changed this to not need parameters.
-		this.hit++;
+		this.setHit();
 		if (this.length == this.hit) {
 			this.sunk = true;
 		}/* else {
@@ -44,7 +52,7 @@ public class Ships extends Player{
 		this.length = length;
 	}
 	public String getName() {
-		return name;
+		return this.name;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -60,5 +68,8 @@ public class Ships extends Player{
 	}
 	public void setHit() {
 		hit++;
+	}
+	public int getId() {
+		return shipId;
 	}
 }
