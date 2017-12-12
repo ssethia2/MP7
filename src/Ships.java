@@ -1,4 +1,4 @@
-public class Ships extends Player{
+public class Ships{
 	/**Name of the ship **/
 	private String name;
 	/**Length of the ship MAX can be 10 units **/
@@ -28,7 +28,7 @@ public class Ships extends Player{
 	 * @param hits amount of hits taken
 	 */
 	public boolean hitShip(/*final int shipLen, final int hits*/) {//I changed this to not need parameters.
-		this.hit++;
+		this.setHit();
 		if (this.length == this.hit) {
 			this.sunk = true;
 		}/* else {
@@ -44,7 +44,7 @@ public class Ships extends Player{
 		this.length = length;
 	}
 	public String getName() {
-		return name;
+		return this.name;
 	}
 	public void setName(String name) {
 		this.name = name;
